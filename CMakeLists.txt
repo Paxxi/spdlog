@@ -212,6 +212,13 @@ if(SPDLOG_NO_ATOMIC_LEVELS)
     target_compile_definitions(spdlog_header_only INTERFACE SPDLOG_NO_ATOMIC_LEVELS)
 endif()
 
+target_compile_options(spdlog PRIVATE /sdl-)
+target_link_options(spdlog
+  PRIVATE
+    /INCREMENTAL:NO
+    /debug:full
+)
+
 
 #---------------------------------------------------------------------------------------
 # Build binaries
@@ -244,6 +251,17 @@ if (SPDLOG_INSTALL)
     set(export_dest_dir "${CMAKE_INSTALL_LIBDIR}/cmake/spdlog")
     set(pkgconfig_install_dir "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
     set(pkg_config "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc")
+
+    install(FILES
+        ${PROJECT_BINARY_DIR}/RelWithDebInfo/spdlog.pdb
+        DESTINATION lib
+        CONFIGURATIONS RelWithDebInfo
+    )
+    install(FILES
+        ${PROJECT_BINARY_DIR}/Debug/spdlogd.pdb
+        DESTINATION lib
+        CONFIGURATIONS Debug
+    )
 
     #---------------------------------------------------------------------------------------
     # Include files
