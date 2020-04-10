@@ -212,6 +212,15 @@ if(SPDLOG_NO_ATOMIC_LEVELS)
     target_compile_definitions(spdlog_header_only INTERFACE SPDLOG_NO_ATOMIC_LEVELS)
 endif()
 
+set_target_properties(spdlog
+  PROPERTIES
+    COMPILE_PDB_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}
+    PDB_NAME spdlog
+    PDB_NAME_DEBUG spdlogd
+    COMPILE_PDB_NAME spdlog
+    COMPILE_PDB_NAME_DEBUG spdlogd
+)
+
 target_compile_options(spdlog
   PRIVATE
     /sdl-
