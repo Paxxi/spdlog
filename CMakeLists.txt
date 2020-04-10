@@ -212,7 +212,12 @@ if(SPDLOG_NO_ATOMIC_LEVELS)
     target_compile_definitions(spdlog_header_only INTERFACE SPDLOG_NO_ATOMIC_LEVELS)
 endif()
 
-target_compile_options(spdlog PRIVATE /sdl-)
+target_compile_options(spdlog
+  PRIVATE
+    /sdl-
+    /EHsc
+    /WX-
+)
 target_link_options(spdlog
   PRIVATE
     /INCREMENTAL:NO
